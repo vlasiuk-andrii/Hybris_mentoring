@@ -1,10 +1,13 @@
 package desktop.page;
 
 import abstractClasses.page.AbstractPage;
+import desktop.fragment.SearchProductItemFragment;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
 public class HomePage extends AbstractPage {
+
+    //private SearchProductItemFragment searchProductItemFragment = new SearchProductItemFragment();
 
     private By logo = By.xpath("//img[@title='hybris Accelerator']");
 
@@ -40,5 +43,9 @@ public class HomePage extends AbstractPage {
         isSignInDisplayed();
         isSearchFieldDisplayed();
         isNavigationMenuDisplayed();
+    }
+
+    public SearchProductItemFragment getSearchProductItemFragment(){
+        return new SearchProductItemFragment();
     }
 }

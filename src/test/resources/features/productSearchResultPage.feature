@@ -8,12 +8,12 @@ So that I can quickly search products and see search results
 Background:
 Given I am an anonymous customer with clear cookies
 And I am on home page
-And I search for ""camileo""
+And I search for "camileo"
 And I am redirected to a Search page
 
 Scenario: Search and view search result
-When I find 2 products with name ""CAMILEO""
-Then all product contains image, price, button ""Add to cart""
+When I find 2 products with name "CAMILEO"
+Then all product contains image, price, button "Add to cart"
 
 Scenario: Add to cart
 When click ""Add to cart"" button for product ""CAMILEO S10 EU""
