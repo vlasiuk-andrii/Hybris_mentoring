@@ -1,3 +1,5 @@
+@smoke
+
 Feature: Home page
 
 As a anonymous customer

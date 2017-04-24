@@ -1,4 +1,4 @@
-package com.bdd.steps;
+package stepdefs;
 
 public class ProductSearchResultSteps {
 }

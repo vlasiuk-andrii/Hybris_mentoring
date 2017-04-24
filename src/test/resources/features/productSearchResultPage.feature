@@ -1,3 +1,5 @@
+@smoke
+
 Feature: Product search result page
 As a anonymous customer
 I want to be able to search product on site

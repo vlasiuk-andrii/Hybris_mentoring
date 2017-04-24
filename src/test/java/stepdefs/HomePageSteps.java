@@ -1,4 +1,4 @@
-package com.bdd.steps;
+package stepdefs;
 
 import com.ServiceWD;
 import cucumber.api.java.After;
