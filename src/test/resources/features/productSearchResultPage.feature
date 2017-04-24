@@ -20,4 +20,3 @@ Then add to cart confirmation pop-up appears
 Scenario: Go to PDP
 When click on product ""CAMILEO S10 EU"" on search result page
 Then I am redirected on product details page
-"

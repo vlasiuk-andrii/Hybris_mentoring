@@ -1,4 +1,4 @@
-"Feature: Desktop Checkout for Guest User
+Feature: Desktop Checkout for Guest User
 As a customer
 I want to be able proceed to checkout
 So that I can specify my delivery and payment details and place the order
@@ -50,4 +50,3 @@ And I can obtain an order number
 And I press ""Continue shopping"" button on checkout confirmation page
 And I am redirected to the home page
 And mini cart icon on home page shows 0 items in cart
-"
