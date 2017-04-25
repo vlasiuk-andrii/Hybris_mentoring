@@ -8,22 +8,24 @@ import java.util.concurrent.TimeUnit;
 
 public class SearchProductItemFragment extends AbstractFragment {
 
-    public SearchProductItemFragment(){}
-
     public SearchProductItemFragment(WebElement element){
         setRootElement(element);
     }
-
+//move to search fragment
     private By searchField = By.cssSelector("input#js-site-search-input");
 
-    private By searchButton = By.cssSelector("span.glyphicon.glyphicon-search");
+    //move to search fragment
+    private By searchButton = By.cssSelector("button.btn.btn-link>span.glyphicon.glyphicon-search");
 
     private By productImage = By.cssSelector("a.thumb>img");
 
     private By productPrice = By.cssSelector("div.price-panel>div>div.price");
 
+    private By productName = By.cssSelector(".name");
+
     private By addToBasketButton = By.xpath("//button[contains(text(),'Add to cart')]");
 
+    //move to search fragment
     public void search(String searchText){
         getDriver().findElement(searchField).sendKeys(searchText);
         getDriver().findElement(searchButton).click();
@@ -51,10 +53,15 @@ public class SearchProductItemFragment extends AbstractFragment {
         return true;
     }
 
+    public String getProductShortName() {
+        return getChildElement(productName).getText().trim();
+    }
+
     public boolean isProductFragmentContentCorrect(SearchProductItemFragment product){
         return  product.isImageDisplayed() && product.isPriceDisplayed() && product.isAddToBasketButtonDisplayed();
     }
 
+//    move to srearchpage
     public void addToBasketProductByName(String productName) {
         getDriver().findElement(By.xpath("//input[@value='" + productName + "']/..//button[contains(text(),'Add to cart')]"));
     }

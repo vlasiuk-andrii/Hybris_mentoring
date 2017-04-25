@@ -13,10 +13,10 @@ public class ServiceWD {
         PageFactory.initElements(driver, this);
     }
 
-    public static void initWD(){
+    public static WebDriver initWD(){
         System.setProperty("webdriver.chrome.driver", BROWSER_PATH_CHROME);
         System.setProperty("webdriver.chrome.silentOutput", "true");
-        driver = new ChromeDriver();
+        return driver = new ChromeDriver();
     }
 
     public static WebDriver getDriver(){

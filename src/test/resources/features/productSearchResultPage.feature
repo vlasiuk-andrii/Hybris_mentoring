@@ -12,7 +12,7 @@ And I search for "camileo"
 And I am redirected to a Search page
 
 Scenario: Search and view search result
-When I find 2 products with name "CAMILEO"
+When I find "2" products with name "CAMILEO"
 Then all product contains image, price, button "Add to cart"
 
 Scenario: Add to cart

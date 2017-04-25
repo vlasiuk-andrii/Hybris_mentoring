@@ -1,28 +1,13 @@
 package stepdefs;
 
-import com.ServiceWD;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import desktop.page.HomePage;
 
-public class HomePageSteps extends ServiceWD {
+public class HomePageSteps {
 
-    private HomePage homePage;
-
-    @Before
-    public void setUp() {
-        homePage = new HomePage();
-        initWD();
-    }
-
-    @After
-    public void tearDown(){
-        driver.close();
-        driver.quit();
-    }
+    private HomePage homePage = new HomePage();
 
     @Given("I am an anonymous customer with clear cookies")
     public void iAmAnonymousCustomerWithClearCookies(){

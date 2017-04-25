@@ -13,19 +13,18 @@ import desktop.page.SearchResultPage;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ProductSearchResultSteps extends ServiceWD {
 
-    private SearchResultPage searchResultPage;
-    private HomePage homePage;
+    private SearchResultPage searchResultPage = new SearchResultPage();
+    private HomePage homePage = new HomePage();
 
     private List<SearchProductItemFragment> searchResultCorrectProducts = new ArrayList<>();
 
     @Before
     public void setUp() {
-        searchResultPage = new SearchResultPage();
-        homePage = new HomePage();
         initWD();
     }
 
@@ -45,9 +44,10 @@ public class ProductSearchResultSteps extends ServiceWD {
         searchResultPage.check();
     }
 
-    @When("I find 2 products with name \"CAMILEO\"")
-    public void iFind2ProductsWithNeededName(){
-        searchResultCorrectProducts = searchResultPage.findProductsByText("Camileo", 2);
+    @When("I find \"(.*?)\" products with name \"(.*?)\"")
+    public void iFind2ProductsWithNeededName(int quantity, String producName){
+        assertEquals(searchResultPage.findProductsByText(producName).size(), quantity);
+
     }
 
     @Then("all product contains image, price, button \"Add to cart\"")
@@ -62,6 +62,7 @@ public class ProductSearchResultSteps extends ServiceWD {
         for (SearchProductItemFragment productItemFragment : searchResultCorrectProducts) {
             productItemFragment.addToBasketProductByName("Camileo S10 EU");
         }
+       //searchResultCorrectProducts.get(1).addToBasketProductByName("Camileo S10 EU");
     }
 
     @Then("add to cart confirmation pop-up appears")

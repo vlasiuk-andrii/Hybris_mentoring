@@ -20,7 +20,7 @@ public class AbstractFragment extends ServiceWD {
     }
 
     public WebElement getChildElement(By cssSelector){
-        return rootElement.findElement(cssSelector);
+        return $(rootElement).find(cssSelector);
     }
 
     public List<By> getChildElements(By... elements){

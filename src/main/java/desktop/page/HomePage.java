@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 
 public class HomePage extends AbstractPage {
 
-    //private SearchProductItemFragment searchProductItemFragment = new SearchProductItemFragment();
+    private SearchProductItemFragment searchProductItemFragment = new SearchProductItemFragment();
 
     private By logo = By.xpath("//img[@title='hybris Accelerator']");
 
@@ -23,7 +23,7 @@ public class HomePage extends AbstractPage {
     }
 
     public void isLogoDisplayed(){
-        Assert.assertTrue("Logo is not displayed", getDriver().findElement(logo).isDisplayed());
+        Assert.assertTrue("Logo is not displayed", $(logo).isDisplayed());
     }
 
     public void isSignInDisplayed(){
@@ -46,6 +46,6 @@ public class HomePage extends AbstractPage {
     }
 
     public SearchProductItemFragment getSearchProductItemFragment(){
-        return new SearchProductItemFragment();
+        return searchProductItemFragment;
     }
 }

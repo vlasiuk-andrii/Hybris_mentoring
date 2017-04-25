@@ -1,7 +1,6 @@
 @home
 
 Feature: Home page
-
 As a anonymous customer
 I want to be landed on the home page when I access the site
 So that I could start my shopping journey
