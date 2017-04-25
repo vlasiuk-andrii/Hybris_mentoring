@@ -1,4 +1,4 @@
-@smoke
+@home
 
 Feature: Home page
 

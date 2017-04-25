@@ -20,8 +20,8 @@ public class HomePageSteps extends ServiceWD {
 
     @After
     public void tearDown(){
-        getDriver().close();
-        getDriver().quit();
+        driver.close();
+        driver.quit();
     }
 
     @Given("I am an anonymous customer with clear cookies")

@@ -13,6 +13,8 @@ import desktop.page.SearchResultPage;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+
 public class ProductSearchResultSteps extends ServiceWD {
 
     private SearchResultPage searchResultPage;
@@ -45,11 +47,25 @@ public class ProductSearchResultSteps extends ServiceWD {
 
     @When("I find 2 products with name \"CAMILEO\"")
     public void iFind2ProductsWithNeededName(){
-        searchResultCorrectProducts = searchResultPage.findProductsByText("CAMILEO", 2);
+        searchResultCorrectProducts = searchResultPage.findProductsByText("Camileo", 2);
     }
 
     @Then("all product contains image, price, button \"Add to cart\"")
     public void productContainsContent(){
+        for (SearchProductItemFragment productItemFragment : searchResultCorrectProducts) {
+            assertTrue("ProductItemContent is incorrect",productItemFragment.isProductFragmentContentCorrect(productItemFragment));
+        }
+    }
 
+    @When("click \"Add to cart\" button for product \"CAMILEO S10 EU\"")
+    public void clickAddToCartForProduct(){
+        for (SearchProductItemFragment productItemFragment : searchResultCorrectProducts) {
+            productItemFragment.addToBasketProductByName("Camileo S10 EU");
+        }
+    }
+
+    @Then("add to cart confirmation pop-up appears")
+    public void addToCartPopUpAppears(){
+        assertTrue("AddToCartPopUp didn't appear",searchResultPage.isAddToCartConfirmationPopUpAppears());
     }
 }
