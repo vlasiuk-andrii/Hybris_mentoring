@@ -63,6 +63,24 @@ public class SearchProductItemFragment extends AbstractFragment {
 
 //    move to srearchpage
     public void addToBasketProductByName(String productName) {
-        getDriver().findElement(By.xpath("//input[@value='" + productName + "']/..//button[contains(text(),'Add to cart')]"));
+        getDriver().findElement(By.xpath("//input[@value='" + productName + "']/..//button[contains(text(),'Add to cart')]")).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clickAddToBasket() {
+        getDriver().findElement(addToBasketButton).click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clickOnProduct(String productName) {
+        getDriver().findElement(By.xpath("//a[contains(text(),'" + productName + "')]")).click();
     }
 }

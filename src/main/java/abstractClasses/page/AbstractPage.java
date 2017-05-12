@@ -6,8 +6,8 @@ import static appendice.CommonConstants.ROOT_URL;
 import static junit.framework.TestCase.assertTrue;
 
 public class AbstractPage extends ServiceWD {
-    private String title;
-    private String url;
+    protected String title;
+    protected String url;
 
     public void visit(){
         driver.get(ROOT_URL + url);

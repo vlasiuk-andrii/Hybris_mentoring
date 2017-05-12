@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class AbstractFragment extends ServiceWD {
 
     private WebElement rootElement;

@@ -8,10 +8,12 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class SearchResultPage extends AbstractPage {
 
     private By addToCartConfirmationPopUp = By.xpath("//div[@id='colorbox'][contains(@style, 'display: block;')]");
-    private By productsLocator = By.cssSelector(By.xpath("//li[@class='product-item']");
+    private By productsLocator = By.xpath("//li[@class='product-item']");
 
     public SearchResultPage(){
         setUrl("/electronics/en/search");
@@ -19,7 +21,7 @@ public class SearchResultPage extends AbstractPage {
     }
 
     public SearchProductItemFragment getSearchProductItemFragment(){
-        return new SearchProductItemFragment();
+        return new SearchProductItemFragment($(productsLocator));
     }
 
 //    create Main fragemnt for Product list
@@ -34,7 +36,15 @@ public class SearchResultPage extends AbstractPage {
     public SearchProductItemFragment findProductByText(String productName) {
         for (SearchProductItemFragment fragment: getAllProductsFragment()){
             if (fragment.getProductShortName().contains(productName))
-                return fragment.clickAddToBasket();
+                return fragment;
+        }
+        throw new IllegalArgumentException("Fragment "+ productName + "did not find!");
+    }
+
+    public void addProductByTextToBasket(String productName) {
+        for (SearchProductItemFragment fragment: getAllProductsFragment()){
+            if (fragment.getProductShortName().contains(productName))
+                fragment.clickAddToBasket();
         }
         throw new IllegalArgumentException("Fragment "+ productName + "did not find!");
     }

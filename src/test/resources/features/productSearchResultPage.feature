@@ -20,5 +20,5 @@ When click "Add to cart" button for product "CAMILEO S10 EU"
 Then add to cart confirmation pop-up appears
 
 Scenario: Go to PDP
-When click on product ""CAMILEO S10 EU"" on search result page
+When click on product "CAMILEO S10 EU" on search result page
 Then I am redirected on product details page

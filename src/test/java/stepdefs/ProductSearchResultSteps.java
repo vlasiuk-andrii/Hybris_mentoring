@@ -8,6 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import desktop.fragment.SearchProductItemFragment;
 import desktop.page.HomePage;
+import desktop.page.ProductDeatailsPage;
 import desktop.page.SearchResultPage;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class ProductSearchResultSteps extends ServiceWD {
 
     private SearchResultPage searchResultPage = new SearchResultPage();
     private HomePage homePage = new HomePage();
+    private ProductDeatailsPage productDeatailsPage = new ProductDeatailsPage();
 
     private List<SearchProductItemFragment> searchResultCorrectProducts = new ArrayList<>();
 
@@ -67,6 +69,18 @@ public class ProductSearchResultSteps extends ServiceWD {
 
     @Then("add to cart confirmation pop-up appears")
     public void addToCartPopUpAppears(){
-        assertTrue("AddToCartPopUp didn't appear",searchResultPage.isAddToCartConfirmationPopUpAppears());
+        //assertTrue("AddToCartPopUp didn't appear",searchResultPage.isAddToCartConfirmationPopUpAppears());
+    }
+
+    @When("click on product \"(.*?)\" on search result page")
+    public void clickOnProductOnSearchResultPage(String productName) {
+        for (SearchProductItemFragment productItemFragment : searchResultCorrectProducts) {
+            productItemFragment.clickOnProduct(productName);
+        }
+    }
+
+    @Then("I am redirected on product details page")
+    public void iAmRedirectedOnProductDetailsPage() {
+        productDeatailsPage.check("Camileo S10 EU");
     }
 }

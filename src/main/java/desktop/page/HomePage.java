@@ -5,9 +5,9 @@ import desktop.fragment.SearchProductItemFragment;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-public class HomePage extends AbstractPage {
+import static com.codeborne.selenide.Selenide.$;
 
-    private SearchProductItemFragment searchProductItemFragment = new SearchProductItemFragment();
+public class HomePage extends AbstractPage {
 
     private By logo = By.xpath("//img[@title='hybris Accelerator']");
 
@@ -17,13 +17,17 @@ public class HomePage extends AbstractPage {
 
     private By navigationMenu = By.cssSelector("nav.main-navigation.js-enquire-offcanvas-navigation");
 
+    private By productsLocator = By.xpath("//li[@class='product-item']");
+
+    private SearchProductItemFragment searchProductItemFragment = new SearchProductItemFragment($(productsLocator));
+
     public HomePage(){
         setUrl("/");
         setTitle("");
     }
 
     public void isLogoDisplayed(){
-        Assert.assertTrue("Logo is not displayed", $(logo).isDisplayed());
+        Assert.assertTrue("Logo is not displayed", getDriver().findElement(logo).isDisplayed());
     }
 
     public void isSignInDisplayed(){
@@ -35,7 +39,7 @@ public class HomePage extends AbstractPage {
     }
 
     public void isNavigationMenuDisplayed(){
-        Assert.assertTrue("NavigationMenu is not displayed", getDriver().findElement(navigationMenu).isDisplayed());
+        Assert.assertTrue("NavigationMenu is not displayed",getDriver().findElement(navigationMenu).isDisplayed());
     }
 
     public void isContentOnPageCorrect(){
