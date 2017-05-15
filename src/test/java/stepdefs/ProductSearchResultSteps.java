@@ -63,7 +63,6 @@ public class ProductSearchResultSteps extends ServiceWD {
     @When("click \"Add to cart\" button for product \"(.*?)\"")
     public void clickAddToCartForProduct(String productName){
         searchResultCorrectProducts.addAll(searchResultPage.getAllProductsFragment());
-
         for (SearchResultItemFragment productItemFragment : searchResultCorrectProducts) {
             productItemFragment.addToBasketProductByName(productName);
         }
@@ -77,7 +76,6 @@ public class ProductSearchResultSteps extends ServiceWD {
     @When("click on product \"(.*?)\" on search result page")
     public void clickOnProductOnSearchResultPage(String productName) {
         searchResultCorrectProducts.addAll(searchResultPage.getAllProductsFragment());
-
         for (SearchResultItemFragment productItemFragment : searchResultCorrectProducts) {
             try {
                 productItemFragment.clickOnProduct(productName);

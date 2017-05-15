@@ -24,7 +24,6 @@ public class SearchResultPage extends AbstractPage {
         return new SearchResultItemFragment($(productsLocator));
     }
 
-//    create Main fragemnt for Product list
     public List<SearchResultItemFragment> getAllProductsFragment() {
         List<SearchResultItemFragment> list = new ArrayList<>();
         for(WebElement element: getDriver().findElements(productsLocator)) {
@@ -58,9 +57,8 @@ public class SearchResultPage extends AbstractPage {
         return elements;
     }
 
-
     public boolean isAddToCartConfirmationPopUpAppears() {
-        sleep(1);
+        sleep(2);
         if (!getDriver().findElement(addToCartConfirmationPopUp).isDisplayed()){
             return false;
         }
