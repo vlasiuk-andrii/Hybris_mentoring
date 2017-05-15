@@ -1,7 +1,7 @@
 package desktop.page;
 
 import abstractClasses.page.AbstractPage;
-import desktop.fragment.SearchProductItemFragment;
+import desktop.fragment.SearchResultItemFragment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class SearchResultPage extends AbstractPage {
 
-    private By addToCartConfirmationPopUp = By.xpath("//div[@id='colorbox'][contains(@style, 'display: block;')]");
+    private By addToCartConfirmationPopUp = By.xpath("//div[@id='colorbox'][contains(@style, 'display: block;')]/div/div[2]/div[2]/div");
     private By productsLocator = By.xpath("//li[@class='product-item']");
 
     public SearchResultPage(){
@@ -20,21 +20,21 @@ public class SearchResultPage extends AbstractPage {
         setTitle("Search");
     }
 
-    public SearchProductItemFragment getSearchProductItemFragment(){
-        return new SearchProductItemFragment($(productsLocator));
+    public SearchResultItemFragment getSearchProductItemFragment(){
+        return new SearchResultItemFragment($(productsLocator));
     }
 
 //    create Main fragemnt for Product list
-    public List<SearchProductItemFragment> getAllProductsFragment() {
-        List<SearchProductItemFragment> list = new ArrayList<>();
+    public List<SearchResultItemFragment> getAllProductsFragment() {
+        List<SearchResultItemFragment> list = new ArrayList<>();
         for(WebElement element: getDriver().findElements(productsLocator)) {
-            list.add(new SearchProductItemFragment(element));
+            list.add(new SearchResultItemFragment(element));
         }
         return list;
     }
 
-    public SearchProductItemFragment findProductByText(String productName) {
-        for (SearchProductItemFragment fragment: getAllProductsFragment()){
+    public SearchResultItemFragment findProductByText(String productName) {
+        for (SearchResultItemFragment fragment: getAllProductsFragment()){
             if (fragment.getProductShortName().contains(productName))
                 return fragment;
         }
@@ -42,16 +42,16 @@ public class SearchResultPage extends AbstractPage {
     }
 
     public void addProductByTextToBasket(String productName) {
-        for (SearchProductItemFragment fragment: getAllProductsFragment()){
+        for (SearchResultItemFragment fragment: getAllProductsFragment()){
             if (fragment.getProductShortName().contains(productName))
                 fragment.clickAddToBasket();
         }
         throw new IllegalArgumentException("Fragment "+ productName + "did not find!");
     }
 
-    public List<SearchProductItemFragment> findProductsByText(String productName) {
-        List<SearchProductItemFragment> elements = new ArrayList<>();
-        for (SearchProductItemFragment fragment: getAllProductsFragment()) {
+    public List<SearchResultItemFragment> findProductsByText(String productName) {
+        List<SearchResultItemFragment> elements = new ArrayList<>();
+        for (SearchResultItemFragment fragment: getAllProductsFragment()) {
             if (fragment.getProductShortName().contains(productName))
                 elements.add(fragment);
         }
@@ -60,6 +60,7 @@ public class SearchResultPage extends AbstractPage {
 
 
     public boolean isAddToCartConfirmationPopUpAppears() {
+        sleep(1);
         if (!getDriver().findElement(addToCartConfirmationPopUp).isDisplayed()){
             return false;
         }

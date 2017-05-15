@@ -6,10 +6,11 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import desktop.fragment.SearchProductItemFragment;
+import desktop.fragment.SearchResultItemFragment;
 import desktop.page.HomePage;
 import desktop.page.ProductDeatailsPage;
 import desktop.page.SearchResultPage;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ProductSearchResultSteps extends ServiceWD {
     private HomePage homePage = new HomePage();
     private ProductDeatailsPage productDeatailsPage = new ProductDeatailsPage();
 
-    private List<SearchProductItemFragment> searchResultCorrectProducts = new ArrayList<>();
+    private List<SearchResultItemFragment> searchResultCorrectProducts = new ArrayList<>();
 
     @Before
     public void setUp() {
@@ -38,7 +39,7 @@ public class ProductSearchResultSteps extends ServiceWD {
 
     @Given("I search for \"camileo\"")
     public void iSearchForCamileo(){
-        homePage.getSearchProductItemFragment().search("camileo");
+        homePage.getSearchFragment().search("camileo");
     }
 
     @Given("I am redirected to a Search page")
@@ -54,28 +55,33 @@ public class ProductSearchResultSteps extends ServiceWD {
 
     @Then("all product contains image, price, button \"Add to cart\"")
     public void productContainsContent(){
-        for (SearchProductItemFragment productItemFragment : searchResultCorrectProducts) {
+        for (SearchResultItemFragment productItemFragment : searchResultCorrectProducts) {
             assertTrue("ProductItemContent is incorrect",productItemFragment.isProductFragmentContentCorrect(productItemFragment));
         }
     }
 
-    @When("click \"Add to cart\" button for product \"CAMILEO S10 EU\"")
-    public void clickAddToCartForProduct(){
-        for (SearchProductItemFragment productItemFragment : searchResultCorrectProducts) {
-            productItemFragment.addToBasketProductByName("Camileo S10 EU");
+    @When("click \"Add to cart\" button for product \"(.*?)\"")
+    public void clickAddToCartForProduct(String productName){
+        searchResultCorrectProducts.addAll(searchResultPage.getAllProductsFragment());
+
+        for (SearchResultItemFragment productItemFragment : searchResultCorrectProducts) {
+            productItemFragment.addToBasketProductByName(productName);
         }
-       //searchResultCorrectProducts.get(1).addToBasketProductByName("Camileo S10 EU");
     }
 
     @Then("add to cart confirmation pop-up appears")
     public void addToCartPopUpAppears(){
-        //assertTrue("AddToCartPopUp didn't appear",searchResultPage.isAddToCartConfirmationPopUpAppears());
+        assertTrue("AddToCartPopUp didn't appear",searchResultPage.isAddToCartConfirmationPopUpAppears());
     }
 
     @When("click on product \"(.*?)\" on search result page")
     public void clickOnProductOnSearchResultPage(String productName) {
-        for (SearchProductItemFragment productItemFragment : searchResultCorrectProducts) {
-            productItemFragment.clickOnProduct(productName);
+        searchResultCorrectProducts.addAll(searchResultPage.getAllProductsFragment());
+
+        for (SearchResultItemFragment productItemFragment : searchResultCorrectProducts) {
+            try {
+                productItemFragment.clickOnProduct(productName);
+            } catch (NoSuchElementException e){}
         }
     }
 

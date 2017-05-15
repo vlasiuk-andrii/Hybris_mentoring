@@ -1,7 +1,8 @@
 package desktop.page;
 
 import abstractClasses.page.AbstractPage;
-import desktop.fragment.SearchProductItemFragment;
+import desktop.fragment.SearchFragment;
+import desktop.fragment.SearchResultItemFragment;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
@@ -19,7 +20,8 @@ public class HomePage extends AbstractPage {
 
     private By productsLocator = By.xpath("//li[@class='product-item']");
 
-    private SearchProductItemFragment searchProductItemFragment = new SearchProductItemFragment($(productsLocator));
+    private SearchResultItemFragment searchResultItemFragment = new SearchResultItemFragment($(productsLocator));
+    private SearchFragment searchFragment = new SearchFragment($(searchField));
 
     public HomePage(){
         setUrl("/");
@@ -49,7 +51,11 @@ public class HomePage extends AbstractPage {
         isNavigationMenuDisplayed();
     }
 
-    public SearchProductItemFragment getSearchProductItemFragment(){
-        return searchProductItemFragment;
+    public SearchResultItemFragment getSearchResultItemFragment(){
+        return searchResultItemFragment;
+    }
+
+    public SearchFragment getSearchFragment(){
+        return searchFragment;
     }
 }
