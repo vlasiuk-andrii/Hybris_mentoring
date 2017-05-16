@@ -22,7 +22,8 @@ public class CheckoutLoginPage  extends AbstractPage {
     }
 
     public void proceedAsGuest() {
+        getDriver().findElement(emailInput).click();
         getDriver().findElement(checkoutAsGuestButton).click();
-        sleep(2);
+        sleep(1);
     }
 }
