@@ -11,14 +11,11 @@ import static com.codeborne.selenide.Selenide.$;
 public class HomePage extends AbstractPage {
 
     private By logo = By.xpath("//img[@title='hybris Accelerator']");
-
     private By signIn = By.cssSelector("li.liOffcanvas");
-
     private By searchField = By.cssSelector("input#js-site-search-input");
-
     private By navigationMenu = By.cssSelector("nav.main-navigation.js-enquire-offcanvas-navigation");
-
     private By productsLocator = By.xpath("//li[@class='product-item']");
+    private By basketItemsAmount = By.cssSelector("div.mini-cart-count.js-mini-cart-count");
 
     private SearchResultItemFragment searchResultItemFragment = new SearchResultItemFragment($(productsLocator));
     private SearchFragment searchFragment = new SearchFragment($(searchField));
@@ -57,5 +54,12 @@ public class HomePage extends AbstractPage {
 
     public SearchFragment getSearchFragment(){
         return searchFragment;
+    }
+
+    public boolean isBasketAmountCorrect(String amount) {
+        if(getDriver().findElement(basketItemsAmount).getText().contains(amount)){
+            return true;
+        }
+        return false;
     }
 }

@@ -48,4 +48,4 @@ And checkout message is "Thank you for shopping with us"
 And I can obtain an order number
 And I press "Continue Shopping" button on checkout confirmation page
 And I am redirected to the home page
-#And mini cart icon on home page shows 0 items in cart
+And mini cart icon on home page shows 0 items in cart

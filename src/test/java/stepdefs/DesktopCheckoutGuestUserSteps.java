@@ -161,4 +161,9 @@ public class DesktopCheckoutGuestUserSteps {
     public void iAmRedirectedToTheHomePage() {
         homePage.check();
     }
+
+    @And("^mini cart icon on home page shows (\\d+) items in cart$")
+    public void miniCartIconOnHomePageShowsItemsInCart(String itemsAmount) {
+        assertTrue("In basket is incorrect products amount", homePage.isBasketAmountCorrect(itemsAmount));
+    }
 }
