@@ -7,6 +7,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import desktop.page.*;
 
+import java.util.Map;
+
 import static com.ServiceWD.sleep;
 import static junit.framework.TestCase.assertTrue;
 
@@ -19,6 +21,7 @@ public class DesktopCheckoutGuestUserSteps {
     private DeliveryMethodPage deliveryMethodPage = new DeliveryMethodPage();
     private WorldPayPage worldPayPage = new WorldPayPage();
     private ConfirmationPage confirmationPage = new ConfirmationPage();
+    private CheckoutSummeryPage checkoutSummeryPage = new CheckoutSummeryPage();
 
     @Given("^I select \"Add to cart\" for product \"([^\"]*)\"$")
     public void iSelectAddToCartForProduct(String productId){
@@ -38,11 +41,9 @@ public class DesktopCheckoutGuestUserSteps {
 
     @And("^I can view order summary$")
     public void iCanViewOrderSummary(DataTable table){
-//        List<List<String>> asList = table.raw();
-//        Map<String, String> asMap = new HashMap();
-//        for(List<String> row : asList) {
-//            System.out.println(row);
-//        }
+        for (Map<String, String> row : table.asMaps(String.class, String.class)) {
+            assertTrue("Summery on CartPage is incorrect",cartPage.verifySummery(row.get("Order Subtotal"), row.get("Order Total")));
+        }
     }
 
     @And("^I click \"([^\"]*)\" button after redirect to cart page$")
@@ -67,17 +68,23 @@ public class DesktopCheckoutGuestUserSteps {
     }
 
     @And("^I have the following final review$")
-    public void iHaveTheFollowingFinalReview() {
-        //tbd
+    public void iHaveTheFollowingFinalReview(DataTable table) {
+        for (Map<String, String> row : table.asMaps(String.class, String.class)) {
+            assertTrue("Summery on DeliveryPage is incorrect",deliveryAddressPage.verifySummery(row.get("Subtotal"), row.get("Total"), row.get("Tax")));
+        }
+//        List<String> row = table.asList(String.class);
+//        assertTrue("Summery on DeliveryPage is incorrect", deliveryAddressPage.verifySummery(row.get(3), row.get(4), row.get(5)));
     }
 
     @And("^I fill in delivery address information$")
-    public void iFillInDeliveryAddressInformation() {
-        deliveryAddressPage.chooseCountry("United States");
-        deliveryAddressPage.chooseTitle("Mr.");
-        deliveryAddressPage.inputFirstName("John");
-        deliveryAddressPage.inputLastName("Doe");
-        deliveryAddressPage.addAddress("16 Sandy Palace", "Honesdale", "Pennsylvania", "18431-0000");
+    public void iFillInDeliveryAddressInformation(DataTable table) {
+        for (Map<String,String> row : table.asMaps(String.class,String.class)){
+            deliveryAddressPage.chooseCountry(row.get("Country"));
+            deliveryAddressPage.chooseTitle(row.get("Title"));
+            deliveryAddressPage.inputFirstName(row.get("First Name"));
+            deliveryAddressPage.inputLastName(row.get("Last Name"));
+            deliveryAddressPage.addAddress(row.get("Address Line 1"), row.get("City"), row.get("Region"), row.get("Post Code"));
+        }
     }
 
     @When("^I press \"Next\" button on delivery address page$")
@@ -91,8 +98,10 @@ public class DesktopCheckoutGuestUserSteps {
     }
 
     @And("^I have the final review$")
-    public void iHaveTheFinalReview() {
-        //tbd
+    public void iHaveTheFinalReview(DataTable table) {
+        for (Map<String,String> row : table.asMaps(String.class,String.class)) {
+            assertTrue("Summery on DeliveryMethodPage is incorrect", deliveryMethodPage.verifySummery(row.get("Subtotal"), row.get("Delivery"), row.get("Tax"), row.get("Total")));
+        }
     }
 
     @And("^I select \"([^\"]*)\" delivery method$")
@@ -126,9 +135,8 @@ public class DesktopCheckoutGuestUserSteps {
     }
 
     @And("^I enter test card data$")
-    public void iEnterTestCardData(DataTable cardTable) {
-        worldPayPage.enterCardDetails("4111111111111111", "2019","03","123");
-        worldPayPage.clickOnButtonByText("Next");
+    public void iEnterTestCardData(Map<String, String> table) {
+        worldPayPage.enterCardDetails(table.get("type"), table.get("number"), table.get("year"), table.get("month"), table.get("verificationID"));
         }
 
     @And("^I click Make payment button$")
@@ -165,5 +173,17 @@ public class DesktopCheckoutGuestUserSteps {
     @And("^mini cart icon on home page shows (\\d+) items in cart$")
     public void miniCartIconOnHomePageShowsItemsInCart(String itemsAmount) {
         assertTrue("In basket is incorrect products amount", homePage.isBasketAmountCorrect(itemsAmount));
+    }
+
+    @And("^I have the following final review at order confirmation page$")
+    public void iHaveTheFollowingFinalReviewAtOrderConfirmationPage(DataTable table) {
+//        for (Map<String,String> row : table.asMaps(String.class,String.class)) {
+//            assertTrue("Summery on CheckoutSummery is incorrect", checkoutSummeryPage.verifySummery(row.get("Subtotal"), row.get("Delivery"), row.get("Tax"), row.get("Total")));
+//        }
+    }
+
+    @And("^I press \"([^\"]*)\" button$")
+    public void iPressButton(String buttonName) {
+        worldPayPage.clickOnButtonByText(buttonName);
     }
 }

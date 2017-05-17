@@ -19,6 +19,9 @@ public class DeliveryAddressPage extends AbstractPage {
     private By stateDropDown = By.id("address.region");
     private By zipInput = By.id("address.postcode");
     private By nextButton = By.id("addressSubmit");
+    private By subTotal = By.cssSelector("div.subtotal>span");
+    private By total = By.cssSelector("div.totals>span");
+    private By tax = By.cssSelector("div.tax>span");
 
     public void chooseCountry(String countryName){
         Select countryDropList = new Select(getDriver().findElement(countryDropDown));
@@ -50,5 +53,14 @@ public class DeliveryAddressPage extends AbstractPage {
     public void clickNextButton() {
         getDriver().findElement(nextButton).click();
         sleep(1);
+    }
+
+    public boolean verifySummery(String subTotalPrice, String totalPrice, String taxPrice) {
+        if(getDriver().findElement(subTotal).getText().contains(subTotalPrice) &
+                getDriver().findElement(total).getText().contains(totalPrice) &
+                getDriver().findElement(tax).getText().contains(taxPrice)){
+            return true;
+        }
+        return false;
     }
 }

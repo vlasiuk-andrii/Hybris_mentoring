@@ -22,12 +22,12 @@ public class WorldPayPage extends AbstractPage {
         //is true by default
     }
 
-    public void enterCardDetails(String number, String year, String month, String cvv) {
+    public void enterCardDetails(String type, String number, String year, String month, String cvv) {
         Select cardTypeDropList = new Select(getDriver().findElement(cardTypeDropDown));
         Select cardMonthDropList = new Select(getDriver().findElement(cardMonthDropDown));
         Select cardYearDropList = new Select(getDriver().findElement(cardYearDropDown));
 
-        cardTypeDropList.selectByIndex(003);
+        cardTypeDropList.selectByVisibleText(type);
         getDriver().findElement(cardNumerInput).sendKeys(number);
         cardMonthDropList.selectByVisibleText(month);
         cardYearDropList.selectByVisibleText(year);
