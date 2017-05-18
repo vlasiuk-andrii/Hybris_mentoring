@@ -21,8 +21,7 @@ public class DeliveryMethodPage extends AbstractPage {
 
     public void chooseShipmentMethod(String shipmentMethod) {
         Select shipmentMethodDropList = new Select($(shipmentMethodDropDown));
-        shipmentMethodDropList.selectByIndex(0);
-//        shipmentMethodDropList.selectByVisibleText(shipmentMethod);
+        shipmentMethodDropList.selectByVisibleText(shipmentMethod);
     }
 
     public void clickOnNextButton() {

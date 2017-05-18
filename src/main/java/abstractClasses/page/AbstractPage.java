@@ -19,7 +19,6 @@ public class AbstractPage extends ServiceWD {
     }
 
     public void visit(String requestText){
-        //getDriver().get(ROOT_URL + url + requestText);
         open(ROOT_URL + url + requestText);
     }
 

@@ -72,8 +72,6 @@ public class DesktopCheckoutGuestUserSteps {
         for (Map<String, String> row : table.asMaps(String.class, String.class)) {
             assertTrue("Summery on DeliveryPage is incorrect",deliveryAddressPage.verifySummery(row.get("Subtotal"), row.get("Total"), row.get("Tax")));
         }
-//        List<String> row = table.asList(String.class);
-//        assertTrue("Summery on DeliveryPage is incorrect", deliveryAddressPage.verifySummery(row.get(3), row.get(4), row.get(5)));
     }
 
     @And("^I fill in delivery address information$")
