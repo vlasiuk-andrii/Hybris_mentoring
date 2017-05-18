@@ -3,6 +3,8 @@ package desktop.page;
 import abstractClasses.page.AbstractPage;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class CheckoutLoginPage  extends AbstractPage {
     public CheckoutLoginPage(){
         setUrl("/login/checkout");
@@ -14,16 +16,16 @@ public class CheckoutLoginPage  extends AbstractPage {
     private By checkoutAsGuestButton = By.cssSelector("button.btn.btn-default.btn-block.guestCheckoutBtn");
 
     public void inputEmail(String email) {
-        getDriver().findElement(emailInput).sendKeys(email);
+        $(emailInput).sendKeys(email);
     }
 
     public void inputConfirmationEmail(String email) {
-        getDriver().findElement(emailConfirmationInput).sendKeys(email);
+        $(emailConfirmationInput).sendKeys(email);
     }
 
     public void proceedAsGuest() {
-        getDriver().findElement(emailInput).click();
-        getDriver().findElement(checkoutAsGuestButton).click();
+        $(emailInput).click();
+        $(checkoutAsGuestButton).click();
         sleep(1);
     }
 }

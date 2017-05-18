@@ -4,6 +4,8 @@ import abstractClasses.page.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class DeliveryMethodPage extends AbstractPage {
     public DeliveryMethodPage(){
         setUrl("/checkout/multi/delivery-method/");
@@ -18,20 +20,20 @@ public class DeliveryMethodPage extends AbstractPage {
     private By delivery = By.cssSelector("div.shipping>span");
 
     public void chooseShipmentMethod(String shipmentMethod) {
-        Select shipmentMethodDropList = new Select(getDriver().findElement(shipmentMethodDropDown));
+        Select shipmentMethodDropList = new Select($(shipmentMethodDropDown));
         shipmentMethodDropList.selectByIndex(0);
 //        shipmentMethodDropList.selectByVisibleText(shipmentMethod);
     }
 
     public void clickOnNextButton() {
-        getDriver().findElement(deliveryMethodNextButton).click();
+        $(deliveryMethodNextButton).click();
     }
 
     public boolean verifySummery(String subtotalPrice, String deliveryPrice, String taxPrice, String totalPrice) {
-        if(getDriver().findElement(subTotal).getText().contains(subtotalPrice) &
-                getDriver().findElement(delivery).getText().contains(deliveryPrice) &
-                getDriver().findElement(tax).getText().contains(taxPrice) &
-                getDriver().findElement(total).getText().contains(totalPrice)){
+        if($(subTotal).getText().contains(subtotalPrice) &
+                $(delivery).getText().contains(deliveryPrice) &
+                $(tax).getText().contains(taxPrice) &
+                $(total).getText().contains(totalPrice)){
             return true;
         } else {
             return false;

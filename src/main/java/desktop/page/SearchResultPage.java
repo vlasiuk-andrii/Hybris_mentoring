@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class SearchResultPage extends AbstractPage {
 
@@ -26,7 +27,7 @@ public class SearchResultPage extends AbstractPage {
 
     public List<SearchResultItemFragment> getAllProductsFragment() {
         List<SearchResultItemFragment> list = new ArrayList<>();
-        for(WebElement element: getDriver().findElements(productsLocator)) {
+        for(WebElement element: getWebDriver().findElements(productsLocator)) {
             list.add(new SearchResultItemFragment(element));
         }
         return list;
@@ -59,7 +60,7 @@ public class SearchResultPage extends AbstractPage {
 
     public boolean isAddToCartConfirmationPopUpAppears() {
         sleep(2);
-        if (!getDriver().findElement(addToCartConfirmationPopUp).isDisplayed()){
+        if (!$(addToCartConfirmationPopUp).isDisplayed()){
             return false;
         }
         return true;

@@ -1,8 +1,6 @@
 package stepdefs;
 
 import com.ServiceWD;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -10,7 +8,6 @@ import desktop.fragment.SearchResultItemFragment;
 import desktop.page.HomePage;
 import desktop.page.ProductDeatailsPage;
 import desktop.page.SearchResultPage;
-import org.openqa.selenium.NoSuchElementException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +23,16 @@ public class ProductSearchResultSteps extends ServiceWD {
 
     private List<SearchResultItemFragment> searchResultCorrectProducts = new ArrayList<>();
 
-    @Before
-    public void setUp() {
-        initWD();
-    }
-
-    @After
-    public void tearDown(){
-        getDriver().close();
-        getDriver().quit();
-    }
+//    @Before
+//    public void setUp() {
+//        initWD();
+//    }
+//
+//    @After
+//    public void tearDown(){
+//        getDriver().close();
+//        getDriver().quit();
+//    }
 
     @Given("I search for \"camileo\"")
     public void iSearchForCamileo(){
@@ -77,9 +74,9 @@ public class ProductSearchResultSteps extends ServiceWD {
     public void clickOnProductOnSearchResultPage(String productName) {
         searchResultCorrectProducts.addAll(searchResultPage.getAllProductsFragment());
         for (SearchResultItemFragment productItemFragment : searchResultCorrectProducts) {
-            try {
+            if(productItemFragment.isProductDisplayed(productName)){
                 productItemFragment.clickOnProduct(productName);
-            } catch (NoSuchElementException e){}
+            }
         }
     }
 

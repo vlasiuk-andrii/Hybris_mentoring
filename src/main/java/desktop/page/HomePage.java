@@ -26,19 +26,19 @@ public class HomePage extends AbstractPage {
     }
 
     public void isLogoDisplayed(){
-        Assert.assertTrue("Logo is not displayed", getDriver().findElement(logo).isDisplayed());
+        Assert.assertTrue("Logo is not displayed", $(logo).isDisplayed());
     }
 
     public void isSignInDisplayed(){
-        Assert.assertTrue("SignIn is not displayed", getDriver().findElement(signIn).isDisplayed());
+        Assert.assertTrue("SignIn is not displayed", $(signIn).isDisplayed());
     }
 
     public void isSearchFieldDisplayed(){
-        Assert.assertTrue("SearchField is not displayed", getDriver().findElement(searchField).isDisplayed());
+        Assert.assertTrue("SearchField is not displayed", $(searchField).isDisplayed());
     }
 
     public void isNavigationMenuDisplayed(){
-        Assert.assertTrue("NavigationMenu is not displayed",getDriver().findElement(navigationMenu).isDisplayed());
+        Assert.assertTrue("NavigationMenu is not displayed",$(navigationMenu).isDisplayed());
     }
 
     public void isContentOnPageCorrect(){
@@ -57,7 +57,7 @@ public class HomePage extends AbstractPage {
     }
 
     public boolean isBasketAmountCorrect(String amount) {
-        if(getDriver().findElement(basketItemsAmount).getText().contains(amount)){
+        if($(basketItemsAmount).getText().contains(amount)){
             return true;
         }
         return false;

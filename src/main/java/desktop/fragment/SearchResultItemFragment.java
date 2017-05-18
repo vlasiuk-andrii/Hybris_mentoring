@@ -4,6 +4,8 @@ import abstractClasses.fragment.AbstractFragment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class SearchResultItemFragment extends AbstractFragment {
 
     public SearchResultItemFragment(WebElement element){
@@ -19,21 +21,21 @@ public class SearchResultItemFragment extends AbstractFragment {
     private By addToBasketButton = By.xpath("//button[contains(text(),'Add to cart')]");
 
     private boolean isImageDisplayed(){
-        if (!getDriver().findElement(productImage).isDisplayed()){
+        if (!$(productImage).isDisplayed()){
             return false;
         }
         return true;
     }
 
     private boolean isPriceDisplayed(){
-        if (!getDriver().findElement(productPrice).isDisplayed()){
+        if (!$(productPrice).isDisplayed()){
             return false;
         }
         return true;
     }
 
     private boolean isAddToBasketButtonDisplayed(){
-        if (!getDriver().findElement(addToBasketButton).isDisplayed()){
+        if (!$(addToBasketButton).isDisplayed()){
             return false;
         }
         return true;
@@ -49,11 +51,11 @@ public class SearchResultItemFragment extends AbstractFragment {
 
 //    move to srearchpage
     public void addToBasketProductByName(String productName) {
-        getDriver().findElement(By.xpath("//input[@value='" + productName + "']/..//button[contains(text(),'Add to cart')]")).click();
+        $(By.xpath("//input[@value='" + productName + "']/..//button[contains(text(),'Add to cart')]")).click();
     }
 
     public void clickAddToBasket() {
-        getDriver().findElement(addToBasketButton).click();
+        $(addToBasketButton).click();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -62,6 +64,13 @@ public class SearchResultItemFragment extends AbstractFragment {
     }
 
     public void clickOnProduct(String productName) {
-        getDriver().findElement(By.xpath("//a[contains(text(),'" + productName + "')]")).click();
+        $(By.xpath("//a[contains(text(),'" + productName + "')]")).click();
+    }
+
+    public boolean isProductDisplayed(String productName) {
+        if($(By.xpath("//a[contains(text(),'" + productName + "')]")).isDisplayed()){
+            return true;
+        }
+        return false;
     }
 }

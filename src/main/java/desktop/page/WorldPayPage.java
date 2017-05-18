@@ -4,6 +4,8 @@ import abstractClasses.page.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class WorldPayPage extends AbstractPage {
     public WorldPayPage() {
         setUrl("/checkout/multi/payment-method/");
@@ -23,18 +25,18 @@ public class WorldPayPage extends AbstractPage {
     }
 
     public void enterCardDetails(String type, String number, String year, String month, String cvv) {
-        Select cardTypeDropList = new Select(getDriver().findElement(cardTypeDropDown));
-        Select cardMonthDropList = new Select(getDriver().findElement(cardMonthDropDown));
-        Select cardYearDropList = new Select(getDriver().findElement(cardYearDropDown));
+        Select cardTypeDropList = new Select($(cardTypeDropDown));
+        Select cardMonthDropList = new Select($(cardMonthDropDown));
+        Select cardYearDropList = new Select($(cardYearDropDown));
 
         cardTypeDropList.selectByVisibleText(type);
-        getDriver().findElement(cardNumerInput).sendKeys(number);
+        $(cardNumerInput).sendKeys(number);
         cardMonthDropList.selectByVisibleText(month);
         cardYearDropList.selectByVisibleText(year);
-        getDriver().findElement(cvvInput).sendKeys(cvv);
+        $(cvvInput).sendKeys(cvv);
     }
 
     public void agreeWithTermsAndConditions() {
-        getDriver().findElement(agreeWithTermsAndConditionsCombobox).click();
+        $(agreeWithTermsAndConditionsCombobox).click();
     }
 }

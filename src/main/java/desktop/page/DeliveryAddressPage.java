@@ -4,6 +4,8 @@ import abstractClasses.page.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class DeliveryAddressPage extends AbstractPage {
     public DeliveryAddressPage(){
         setUrl("/checkout/multi/delivery-address/");
@@ -24,41 +26,41 @@ public class DeliveryAddressPage extends AbstractPage {
     private By tax = By.cssSelector("div.tax>span");
 
     public void chooseCountry(String countryName){
-        Select countryDropList = new Select(getDriver().findElement(countryDropDown));
+        Select countryDropList = new Select($(countryDropDown));
         countryDropList.selectByVisibleText(countryName);
     }
 
     public void chooseTitle(String title){
         sleep(1);
-        Select titleDropList = new Select(getDriver().findElement(titleDropDown));
+        Select titleDropList = new Select($(titleDropDown));
         titleDropList.selectByVisibleText(title);
     }
 
     public void inputFirstName(String firstName){
-        getDriver().findElement(firstNameInput).sendKeys(firstName);
+        $(firstNameInput).sendKeys(firstName);
     }
 
     public void inputLastName(String lastName){
-        getDriver().findElement(lastNameInput).sendKeys(lastName);
+        $(lastNameInput).sendKeys(lastName);
     }
 
     public void addAddress(String addressLine, String city, String state, String zip){
-        getDriver().findElement(addressLineInput).sendKeys(addressLine);
-        getDriver().findElement(cityInput).sendKeys(city);
-        Select stateDropList = new Select(getDriver().findElement(stateDropDown));
+        $(addressLineInput).sendKeys(addressLine);
+        $(cityInput).sendKeys(city);
+        Select stateDropList = new Select($(stateDropDown));
         stateDropList.selectByVisibleText(state);
-        getDriver().findElement(zipInput).sendKeys(zip);
+        $(zipInput).sendKeys(zip);
     }
 
     public void clickNextButton() {
-        getDriver().findElement(nextButton).click();
+        $(nextButton).click();
         sleep(1);
     }
 
     public boolean verifySummery(String subTotalPrice, String totalPrice, String taxPrice) {
-        if(getDriver().findElement(subTotal).getText().contains(subTotalPrice) &
-                getDriver().findElement(total).getText().contains(totalPrice) &
-                getDriver().findElement(tax).getText().contains(taxPrice)){
+        if($(subTotal).getText().contains(subTotalPrice) &
+                $(total).getText().contains(totalPrice) &
+                $(tax).getText().contains(taxPrice)){
             return true;
         }
         return false;
