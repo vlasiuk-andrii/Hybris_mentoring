@@ -19,6 +19,6 @@ public class SearchFragment extends AbstractFragment {
     public void search(String searchText){
         $(searchField).sendKeys(searchText);
         $(searchButton).click();
-        sleep(2);
+        waitForJStoComplete();
     }
 }

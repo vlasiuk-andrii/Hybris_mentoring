@@ -21,7 +21,7 @@ public class ProductDeatailsPage extends AbstractPage {
 
     public void clickAddToCart(){
         $(addToCartButton).click();
-        sleep(2);
+        waitForJStoComplete();
     }
 
 

@@ -26,6 +26,6 @@ public class CheckoutLoginPage  extends AbstractPage {
     public void proceedAsGuest() {
         $(emailInput).click();
         $(checkoutAsGuestButton).click();
-        sleep(1);
+        waitForJStoComplete();
     }
 }

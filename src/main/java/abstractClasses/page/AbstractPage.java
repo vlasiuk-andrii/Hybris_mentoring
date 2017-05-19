@@ -37,7 +37,7 @@ public class AbstractPage extends ServiceWD {
 
     public void clickOnButtonByText(String buttonName){
         $(By.xpath("//*[contains(text(),'" + buttonName + "')]")).click();
-        sleep(2);
+        waitForJStoComplete();
     }
 
 

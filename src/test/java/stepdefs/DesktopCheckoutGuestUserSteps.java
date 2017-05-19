@@ -9,7 +9,7 @@ import desktop.page.*;
 
 import java.util.Map;
 
-import static com.ServiceWD.sleep;
+import static com.ServiceWD.waitForJStoComplete;
 import static junit.framework.TestCase.assertTrue;
 
 public class DesktopCheckoutGuestUserSteps {
@@ -140,7 +140,7 @@ public class DesktopCheckoutGuestUserSteps {
     @And("^I click Make payment button$")
     public void iClickMakePaymentButton(){
         worldPayPage.clickOnButtonByText("Place Order");
-        sleep(5);
+        waitForJStoComplete();
     }
 
     @Then("^I am redirected to checkout confirmation page$")

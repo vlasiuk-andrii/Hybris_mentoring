@@ -59,7 +59,7 @@ public class SearchResultPage extends AbstractPage {
     }
 
     public boolean isAddToCartConfirmationPopUpAppears() {
-        sleep(2);
+        waitForJStoComplete();
         if (!$(addToCartConfirmationPopUp).isDisplayed()){
             return false;
         }

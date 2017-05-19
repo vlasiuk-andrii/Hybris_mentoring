@@ -31,7 +31,7 @@ public class DeliveryAddressPage extends AbstractPage {
     }
 
     public void chooseTitle(String title){
-        sleep(1);
+        waitForJStoComplete();
         Select titleDropList = new Select($(titleDropDown));
         titleDropList.selectByVisibleText(title);
     }
@@ -54,7 +54,7 @@ public class DeliveryAddressPage extends AbstractPage {
 
     public void clickNextButton() {
         $(nextButton).click();
-        sleep(1);
+        waitForJStoComplete();
     }
 
     public boolean verifySummery(String subTotalPrice, String totalPrice, String taxPrice) {
