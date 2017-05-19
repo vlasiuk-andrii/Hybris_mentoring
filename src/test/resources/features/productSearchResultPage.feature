@@ -1,4 +1,4 @@
-@search
+@search @all
 
 Feature: Product search result page
 As a anonymous customer

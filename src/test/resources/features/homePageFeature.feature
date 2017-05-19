@@ -1,4 +1,4 @@
-@home
+@home @all
 
 Feature: Home page
 As a anonymous customer

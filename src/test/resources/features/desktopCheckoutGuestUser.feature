@@ -1,4 +1,4 @@
-@desktop
+@desktop @all
 Feature: Desktop Checkout for Guest User
 As a customer
 I want to be able proceed to checkout

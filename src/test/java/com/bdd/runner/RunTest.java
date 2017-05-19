@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         format = { "pretty", "html:target/cucumber" },
-        tags= {"@search"},
+        tags= {"@all"},
         glue = "stepdefs",
         features = "classpath:features/"
 )
