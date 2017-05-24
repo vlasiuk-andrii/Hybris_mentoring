@@ -7,6 +7,7 @@ import static appendice.CommonConstants.BROWSER_PATH_CHROME;
 import static appendice.CommonConstants.ROOT_URL;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
+import static junit.framework.TestCase.assertTrue;
 
 public class AbstractPage extends ServiceWD {
     protected String title;
@@ -23,8 +24,8 @@ public class AbstractPage extends ServiceWD {
     }
 
     public void check(){
-        url().contains(url);
-        title().contains(title);
+        assertTrue("URL is incorrect",url().contains(url));
+        assertTrue("Title is incorrect",title().contains(title));
     }
 
     protected void setTitle(String title){
