@@ -13,7 +13,7 @@ And Product availability PopUp appears
 Scenario Outline: Content for location with product in stock is correct
 When I select location <LocationName>
 Then I see <LocationName>, <Address>, "New York" and "DIGITAL CAMERA EASYSHARE C875" on the right side of the pop up
-And I see price "$227.24" and <StockLevel>
+And I see price "$227.24" and stockLevel <StockLevel>
 And I can change product amount
 And I select "Add to cart" button
 
@@ -24,7 +24,7 @@ Examples:
 
 Scenario: Content for location where product is out of stock is correct
 When I select location "Sapporo Hotel Resol Trinity Sapporo"
-Then I see " Sapporo Hotel Resol Trinity Sapporo", "1731 Broadway", "New York" and "DIGITAL CAMERA EASYSHARE C875" on the right side of the pop up
+Then I see "Sapporo Hotel Resol Trinity Sapporo", "1731 Broadway", "New York" and "DIGITAL CAMERA EASYSHARE C875" on the right side of the pop up
 And I see price "$227.24" and stockLevel "OUT OF STOCK"
 And I can't change product amount
 And I can't select "Add to cart" button
