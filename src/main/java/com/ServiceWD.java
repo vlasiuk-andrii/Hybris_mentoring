@@ -16,6 +16,10 @@ public class ServiceWD {
 //        return driver = new ChromeDriver();
 //    }
 
+    public WebDriver getDriver(){
+        return driver;
+    }
+
     public static void waitForJStoComplete(){
         new WebDriverWait(getWebDriver(), 30).until((ExpectedCondition<Boolean>) driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
     }

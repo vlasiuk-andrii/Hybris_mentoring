@@ -32,4 +32,18 @@ public class AbstractFragment extends ServiceWD {
         }
         return webElements;
     }
+
+    public boolean isDisplayed(){
+        if (rootElement.isDisplayed()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isButtonEnabled(String buttonName) {
+        if ($(By.xpath("//button[contains(text(),'" + buttonName + "')]")).isEnabled()){
+            return true;
+        }
+        return false;
+    }
 }

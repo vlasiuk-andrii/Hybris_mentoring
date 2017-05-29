@@ -7,24 +7,24 @@ So that I can specify store and add product to basket
 Background:
 Given I am an anonymous customer with clear cookies
 And I am on product deatils page for product "489702"
-And I click on "Pick up in store"
+And I click on "Pick Up in Store"
 And Product availability PopUp appears
 
 Scenario Outline: Content for location with product in stock is correct
-When I select location <LocationName>
-Then I see <LocationName>, <Address>, "New York" and "DIGITAL CAMERA EASYSHARE C875" on the right side of the pop up
-And I see price "$227.24" and stockLevel <StockLevel>
+When I select location "<LocationName>"
+Then I see "<LocationName>", "<Address>", "New York" and "DIGITAL CAMERA EASYSHARE C875" on the right side of the pop up
+And I see price "$227.24" and stockLevel "<StockLevel>"
 And I can change product amount
-And I select "Add to cart" button
+And "Add to cart" button is enabled
 
 Examples:
-| LocationName                        | Address       | StockLevel   |
-| Sapporo Hotel Sunroute Sapporo      | 1732 Broadway | 4 IN STOCK   |
-| Sapporo Ana Hotel Sapporo           | 1728 Broadway | 15 IN STOCK  |
+| LocationName                   | Address       | StockLevel   |
+| Sapporo Hotel Sunroute Sapporo | 1732 Broadway | 4 IN STOCK   |
+| Sapporo Ana Hotel Sapporo      | 1728 Broadway | 15 IN STOCK  |
 
 Scenario: Content for location where product is out of stock is correct
 When I select location "Sapporo Hotel Resol Trinity Sapporo"
 Then I see "Sapporo Hotel Resol Trinity Sapporo", "1731 Broadway", "New York" and "DIGITAL CAMERA EASYSHARE C875" on the right side of the pop up
 And I see price "$227.24" and stockLevel "OUT OF STOCK"
 And I can't change product amount
-And I can't select "Add to cart" button
+And "Add to cart" button is not visible

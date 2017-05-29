@@ -1,69 +1,65 @@
 package stepdefs;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import desktop.page.ProductDeatailsPage;
+
+import static junit.framework.TestCase.assertTrue;
 
 public class PickUpProductStep {
+
+    private ProductDeatailsPage productDeatailsPage = new ProductDeatailsPage();
+
     @And("^I am on product deatils page for product \"([^\"]*)\"$")
-    public void iAmOnProductDeatilsPageForProduct(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iAmOnProductDeatilsPageForProduct(String productId) {
+        productDeatailsPage.visit("/" + productId);
     }
 
     @And("^I click on \"([^\"]*)\"$")
-    public void iClickOn(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iClickOn(String buttonText) {
+        productDeatailsPage.clickOnButtonByText(buttonText);
     }
 
     @And("^Product availability PopUp appears$")
-    public void productAvailabilityPopUpAppears() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void productAvailabilityPopUpAppears() {
+        assertTrue(productDeatailsPage.productAvailabilityPopUpAppears());
+        assertTrue(productDeatailsPage.productAvailabilityPopUpHasData());
     }
 
     @When("^I select location \"([^\"]*)\"$")
-    public void iSelectLocationLocationName(String location) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iSelectLocationByLocationName(String location) {
+        productDeatailsPage.clickOnLocation(location);
     }
 
     @And("^I can change product amount$")
-    public void iCanChangeProductAmount() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iCanChangeProductAmount() {
+        assertTrue("ProductAmount can't be changed",productDeatailsPage.getPickUpFragment().iCanChangeProductAmount());
     }
 
-    @And("^I select \"([^\"]*)\" button$")
-    public void iSelectButton(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @And("^\"([^\"]*)\" button is enabled$")
+    public void iSelectButton(String buttonName) {
+        assertTrue("AddToCartButton is disable",productDeatailsPage.getPickUpFragment().isButtonEnabled(buttonName));
     }
 
     @Then("^I see \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\" on the right side of the pop up$")
-    public void iSeeAndOnTheRightSideOfThePopUp(String arg0, String arg1, String arg2, String arg3) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iSeeAndOnTheRightSideOfThePopUp(String locationName, String address, String city, String productName) {
+        assertTrue("Content in productAvailabilityPopUp is incorrect",productDeatailsPage.isContentOnPageCorrect(locationName, address, city, productName));
     }
 
     @And("^I see price \"([^\"]*)\" and stockLevel \"([^\"]*)\"$")
-    public void iSeePriceAndStockLevel(String arg0, String arg1) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iSeePriceAndStockLevel(String price, String stockLevel) {
+        assertTrue("Price or stockLevel are incorrect",productDeatailsPage.isContentOnPageCorrect(price, stockLevel));
     }
 
     @And("^I can't change product amount$")
-    public void iCanTChangeProductAmount() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void iCanTChangeProductAmount() {
+        assertTrue("Out of stock product has amount buttons",productDeatailsPage.getPickUpFragment().iCanNotChangeProductAmount());
     }
 
-    @And("^I can't select \"([^\"]*)\" button$")
-    public void iCanTSelectButton(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @And("^\"([^\"]*)\" button is not visible$")
+    public void iCanTSelectButton(String buttonName) {
+        assertTrue("Out of stock product has addToCartButton",productDeatailsPage.getPickUpFragment().iCanNotAddProductToCart());
     }
 
 }
